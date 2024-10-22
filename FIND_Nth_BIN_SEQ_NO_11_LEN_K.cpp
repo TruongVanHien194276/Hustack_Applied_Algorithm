@@ -27,7 +27,7 @@
 // Output 
 // 000000100101000001001001010100
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
