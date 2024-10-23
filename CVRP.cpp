@@ -11,8 +11,7 @@
 // Input
 // Line 1: n,K,Q (2≤n≤12,1≤K≤5,1≤Q≤50)
 // Line 2: d[1],...,d[n](1≤d[i]≤10)
-// Line i+3 (i=0,…,n): the i
-// th
+// Line i+3 (i=0,…,n): the ith
 //  row of the distance matrix c (1≤c[i,j]≤30)
 // Output
 // Minimal total travel distance
@@ -88,7 +87,6 @@ bool checkY(int v, int u) {
     if (load[u] + d[v] > q) return false;
     return true;
 }
-
 
 void TRY_Y(int u) {
     int s = 0;

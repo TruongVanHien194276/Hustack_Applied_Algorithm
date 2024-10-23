@@ -106,4 +106,4 @@ int main(int argc, const char** argv) {
 	cout << fixed << setprecision(6) << res;
 
 	return 0;
-}
+} 	
