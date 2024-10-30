@@ -1,4 +1,4 @@
-# Applied Algorithms
+# Applied Algorithms - IT3170E - HUST
 
 ## Topics Covered
 * **NP-Completeness Theory**
