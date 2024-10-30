@@ -26,3 +26,64 @@
 // 5 
 // 1 2 6 7 5 10 3 4 8 9
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX = 2010;
+int n, k;
+int load = 0;
+int c[MAX][MAX];
+bool visited[MAX];
+int path[MAX];
+int f = 0;
+
+bool check(int v){
+    if (visited[v]) return false;
+    if (v > n){
+        if (!visited[v-n]) return false;
+    } else {
+        if (load + 1 > k) return false;
+    }
+    return true;
+}
+
+void CBUS(){
+    for(int step = 1; step <= 2*n; step++){
+        int hub;
+        int min_dis = INT_MAX;
+        for (int value = 1; value <= 2*n; value++){
+            if(check(value) && c[path[step-1]][value] < min_dis){
+                hub = value;
+                min_dis = c[path[step-1]][value];
+            }
+        }
+        path[step] = hub;
+        f = f + min_dis;
+        visited[hub] = true;
+        if (hub <= n) load = load + 1;
+        else load = load - 1;
+    }
+}
+
+int main(int argc, char const *argv[]){
+    cin >> n >> k;
+    
+    for (int i = 0; i <= 2*n; i++){
+        for (int j = 0; j <= 2*n; j++){
+            cin >> c[i][j];
+        }
+    }
+    
+    memset(visited, false, MAX);
+    path[0] = 0;  
+    CBUS();
+
+    
+    cout << n << endl;
+    for (int i = 1; i <= 2*n; i++){
+        cout << path[i] << " ";
+    }
+
+    return 0;
+}
