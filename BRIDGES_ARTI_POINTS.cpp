@@ -82,6 +82,6 @@ int main(int argc, const char** argv) {
         if (numc[i]) numcc++;
     }
 
-    cout << numcc << " " << Count << endl;
+    cout << numcc << " " << Count;
     return 0;
 }
