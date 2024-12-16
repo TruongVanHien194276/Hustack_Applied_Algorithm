@@ -22,3 +22,68 @@
 // Output
 // 97
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX = 100010;
+
+struct comp{
+    bool operator() (pair<int, int> a, pair<int, int> b){
+        return a.second > b.second;
+    }
+};
+
+int n, m;
+vector<vector<pair<int, int> > > Graph;
+int s, t;
+
+void inputData(){
+    cin >> n >> m;
+    Graph.resize(n+1);
+    for (int i = 0; i < m; i++){
+        int u, v, w;
+        cin >> u >> v >> w;
+        Graph[u].push_back({v, w});
+    }
+
+    cin >> s >> t;
+}
+
+int DijkstraAlgorithm(){
+    priority_queue<pair<int, int>, vector< pair<int, int> >, comp> q;
+    int dist[MAX];
+
+    for (int i = 1; i <= n; i++){
+        dist[i] = 1e9;
+    }
+    dist[s] = 0;
+    for (int i = 1; i <= n; i++){
+        q.push({i, dist[i]});
+    }
+
+    // dijkstra algorithm
+    while (!q.empty()){
+        pair<int, int> x = q.top(); 
+        q.pop();
+        int x_point = x.first;
+
+        for (auto v : Graph[x_point]){
+            int v_point = v.first;
+            int v_dist = v.second;
+
+            if (dist[v_point] > dist[x_point] + v_dist){
+                dist[v_point] = dist[x_point] + v_dist;
+                q.push({v_point, dist[v_point]});
+            }
+        }
+    }
+
+    return dist[t];
+}
+
+int main(int argc, const char** argv) {
+    inputData();
+    cout << DijkstraAlgorithm();
+    return 0;
+}
