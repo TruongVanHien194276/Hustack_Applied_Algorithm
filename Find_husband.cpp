@@ -19,38 +19,37 @@
 
 using namespace std;
 
-const int INF = 1e9;
-
-int n;              
-vector<int> a; 
-int M;               
-int res = INF; 
-
-void TRY(int i, int sum) {
-    if (i == n) {
-        if (sum <= M) {
-            int diff = M - sum;
-            res = min(res, diff);
-        }
-        return;
-    }
-
-    TRY(i + 1, sum + a[i]);
-    TRY(i + 1, sum);
-}
-
 int main(int argc, char const *argv[]){
+    int n, m;
     cin >> n;
-    a.resize(n);
+    vector<int> a(n);
     
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
     
-    cin >> M;
-
-    TRY(0, 0);
+    cin >> m;
+    
+    int closest_sum = 0;
+    int res = INT_MAX;
+    
+    int cnt = 1 << n; 
+    
+    for (int v = 0; v < cnt; v++) {
+        int subset_sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (v & (1 << i)) subset_sum += a[i];
+        }
+        
+        if (subset_sum <= m) {
+            int d = m - subset_sum;
+            if (d < res) {
+                res = d;
+                closest_sum = subset_sum;
+            }
+        }
+    }
+    
     cout << res;
-
     return 0;
 }
